@@ -1,0 +1,10 @@
+rules_version = '2';
+// Allow read/write under books/ for app uploads and downloads.
+// Restrict further in production (e.g. require auth).
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /books/{bookId}/{allPaths=**} {
+      allow read, write: if true;
+    }
+  }
+}
